@@ -1,0 +1,39 @@
+const int signalIn=3;
+const int signalOut=6;
+const int photoCell=0;
+const int LED=13;
+int photocellReading;
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  pinMode(signalIn, INPUT);
+  pinMode(signalOut, OUTPUT);
+  pinMode(photoCell, INPUT);
+  pinMode(LED, OUTPUT);
+}
+
+void loop() {
+  Serial.println(digitalRead(signalOut));
+  if(digitalRead(signalIn)==1)
+    digitalWrite(LED,HIGH);
+  else  
+    digitalWrite(LED,LOW);
+
+  photocellReading = analogRead(photoCell);
+  
+  /*if (photocellReading<500)
+    digitalWrite(signalOut,HIGH);
+  else 
+    digitalWrite(signalOut,LOW);*/
+  if (digitalRead(LED)==HIGH){
+    delay(7000);
+    Serial.println("Sending signal");
+    digitalWrite(signalOut,HIGH);
+  }
+  else digitalWrite(signalOut,LOW);
+  Serial.println(digitalRead(signalOut));
+  delay(100);
+}
+//  Serial.println(photocellReading);
+//  Serial.println(digitalRead(nextBoardPin));
